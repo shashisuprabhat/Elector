@@ -1,0 +1,26 @@
+{
+  "name": "elector-app",
+  "version": "1.0.0",
+  "description": "Indian Election Learning Platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shashisuprabhat/Elector.git"
+  },
+  "keywords": [
+    "election",
+    "learning",
+    "india"
+  ],
+  "author": "Shashi Suprabhat",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "eslint": "^8.38.0"
+  }
+}
