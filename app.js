@@ -237,18 +237,56 @@ function initChat() {
     sendBtn.addEventListener('click', handleFreeChat);
     input.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleFreeChat(); });
 
-    function handleFreeChat() {
+    async function handleFreeChat() {
         const text = input.value.trim();
         if (!text) return;
         addUserMsg(text);
         input.value = '';
         
-        setTimeout(() => {
-            const lower = text.toLowerCase();
-            if (lower.includes('nota')) addBotMsg("NOTA stands for 'None Of The Above'. It allows you to express your disapproval of all candidates on the ballot.");
-            else if (lower.includes('vote') || lower.includes('register')) addBotMsg("You must be 18 years old and an Indian citizen to vote. You need to fill Form 6 to get on the voter list.");
-            else addBotMsg("That's an interesting question! In the Indian Election system, every process is designed to ensure a free and fair democratic outcome.");
-        }, 500);
+        // Temporary loading indicator
+        const msgs = document.getElementById('chat-messages');
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'msg bot loading';
+        loadingDiv.textContent = 'Thinking...';
+        msgs.appendChild(loadingDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+
+        try {
+            // Google Gemini API Integration
+            const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // Replace with real key
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+            
+            // If API key is not set, force fallback
+            if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY") throw new Error("API Key not provided");
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: "You are an expert on the Indian Election Process. Keep your answer under 3 sentences and simple to understand. Answer the user: " + text }]
+                    }]
+                })
+            });
+
+            if (!response.ok) throw new Error("API Error");
+
+            const data = await response.json();
+            const botReply = data.candidates[0].content.parts[0].text;
+            
+            msgs.removeChild(loadingDiv);
+            addBotMsg(botReply);
+
+        } catch (error) {
+            // Fallback Mock Logic
+            msgs.removeChild(loadingDiv);
+            setTimeout(() => {
+                const lower = text.toLowerCase();
+                if (lower.includes('nota')) addBotMsg("NOTA stands for 'None Of The Above'. It allows you to express your disapproval of all candidates on the ballot.");
+                else if (lower.includes('vote') || lower.includes('register')) addBotMsg("You must be 18 years old and an Indian citizen to vote. You need to fill Form 6 to get on the voter list.");
+                else addBotMsg("That's an interesting question! In the Indian Election system, every process is designed to ensure a free and fair democratic outcome. (Provide a Gemini API key in app.js for real answers!)");
+            }, 500);
+        }
     }
 
     document.getElementById('guided-next').addEventListener('click', () => {
