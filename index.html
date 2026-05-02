@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elector - Learn Indian Elections</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Traditional Website Navigation -->
+    <nav class="site-nav glass">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="ph-fill ph-flag-banner text-primary"></i>
+                Elector
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#process">The Process</a>
+                <a href="#practice">Practice</a>
+                <a href="#assistant">AI Assistant</a>
+            </div>
+            <div class="role-selector">
+                <span>View as:</span>
+                <select id="role-select">
+                    <option value="voter">Voter</option>
+                    <option value="candidate">Candidate</option>
+                    <option value="officer">Election Officer</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Understand the <span class="text-primary">World's Largest Democracy</span></h1>
+            <p>Your comprehensive guide to the Indian Election process. Learn how it works, test your knowledge, and ask our AI any questions you have.</p>
+            <div class="hero-buttons">
+                <a href="#process" class="btn primary">Start Learning <i class="ph ph-arrow-down"></i></a>
+                <a href="#assistant" class="btn secondary">Ask AI Tutor</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Process Section (Vertical Layout) -->
+    <section id="process" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Step-by-Step Election Process</h2>
+                <p>Follow the complete journey from registration to results.</p>
+            </div>
+            
+            <div class="process-layout">
+                <!-- Sticky Sidebar Timeline -->
+                <div class="timeline-sidebar glass">
+                    <h3>Timeline</h3>
+                    <div class="timeline" id="timeline">
+                        <!-- JS populated links to steps -->
+                    </div>
+                </div>
+
+                <!-- Vertical Steps Content -->
+                <div class="steps-content" id="steps-container">
+                    <!-- JS populated vertically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Section -->
+    <section id="practice" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>Test Your Knowledge</h2>
+                <p>Master the terminology and concepts of the Indian election system.</p>
+            </div>
+            
+            <div class="practice-grid">
+                <!-- Flashcards -->
+                <div class="practice-card glass">
+                    <h3><i class="ph ph-cards"></i> Terminology Flashcards</h3>
+                    <div class="flashcard-container" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <p id="fc-term" class="term">EVM</p>
+                                <small class="flip-hint">Click to flip <i class="ph ph-arrows-clockwise"></i></small>
+                            </div>
+                            <div class="flashcard-back">
+                                <p id="fc-def">Electronic Voting Machine. Used to record votes securely.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fc-controls">
+                        <button class="btn icon-btn" id="fc-prev"><i class="ph ph-caret-left"></i></button>
+                        <span id="fc-count">1/4</span>
+                        <button class="btn icon-btn" id="fc-next"><i class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Global Quiz -->
+                <div class="practice-card glass">
+                    <h3><i class="ph ph-question"></i> Knowledge Quiz</h3>
+                    <div id="quiz-area">
+                        <p id="quiz-q" class="quiz-q">Loading question...</p>
+                        <div id="quiz-options" class="quiz-options">
+                            <!-- JS Populated -->
+                        </div>
+                        <div class="quiz-footer">
+                            <p id="quiz-feedback" class="quiz-feedback"></p>
+                            <button class="btn secondary" id="quiz-next" style="display: none;">Next Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section id="assistant" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Interactive AI Tutor</h2>
+                <p>Have a question? Chat with our AI or start a guided learning tour.</p>
+            </div>
+
+            <div class="embedded-chat glass">
+                <div class="chat-header">
+                    <h4><i class="ph-fill ph-robot"></i> AI Election Tutor</h4>
+                    <span class="status">Online</span>
+                </div>
+                
+                <div class="chat-modes">
+                    <button class="mode-btn active" data-mode="free">Free Chat</button>
+                    <button class="mode-btn" data-mode="guided">Guided Learning</button>
+                </div>
+
+                <div class="chat-messages" id="chat-messages">
+                    <div class="msg bot">Hello! Ask me anything about the Indian election process, or switch to 'Guided Learning' to let me tutor you step-by-step.</div>
+                </div>
+
+                <div class="chat-input" id="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Type your question...">
+                    <button class="btn primary icon-btn" id="chat-send"><i class="ph ph-paper-plane-right"></i></button>
+                </div>
+                <div class="guided-controls" id="guided-controls" style="display: none;">
+                    <button class="btn primary" id="guided-next" style="width: 100%;">I'm Ready. Next Step!</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer glass">
+        <div class="container" style="text-align: center;">
+            <div class="logo" style="justify-content: center; margin-bottom: 10px;">
+                <i class="ph-fill ph-flag-banner text-primary"></i>
+                Elector
+            </div>
+            <p style="color: var(--text-muted);">Empowering citizens with democratic knowledge. (Demo Platform)</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
